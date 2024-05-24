@@ -77,14 +77,14 @@ const Quote: React.FC<QuoteType> = ({
   return (
     <div
       key={quote.id}
-      className="w-full m-6 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      className="w-full my-6 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
       <div>
         <Link
           to={`/quote/${quote.id}`}
-          className="mb-2 text-3xl text-gray-900 dark:text-white"
+          className="mb-2 text-2xl text-gray-900 dark:text-white"
         >
-          {quote.content}
+          "{quote.content}" - <span className="italic">{quote.author}</span>
         </Link>
 
         <div className="items-end justify-between	 space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse ">
