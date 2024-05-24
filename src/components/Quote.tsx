@@ -20,6 +20,7 @@ type QuoteType = {
     likes: number;
     dislikes: number;
   }) => void;
+  refetch: () => void;
 };
 
 const customStyles = {
@@ -35,7 +36,12 @@ const customStyles = {
   },
 };
 
-const Quote: React.FC<QuoteType> = ({ quote, mutate, handleSendLike }) => {
+const Quote: React.FC<QuoteType> = ({
+  quote,
+  mutate,
+  handleSendLike,
+  refetch,
+}) => {
   const [isPressed, setIsPressed] = React.useState({
     like: false,
     dislike: false,
@@ -125,7 +131,12 @@ const Quote: React.FC<QuoteType> = ({ quote, mutate, handleSendLike }) => {
         <button onClick={closeModal}>
           <IoMdClose color="white" />
         </button>
-        <EditQuote quote={quote} openModal={openModal} />
+        <EditQuote
+          quote={quote}
+          openModal={openModal}
+          refetch={refetch}
+          closeModal={closeModal}
+        />
       </Modal>
     </div>
   );

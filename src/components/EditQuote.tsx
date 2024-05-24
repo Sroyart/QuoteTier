@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 type Props = {
   quote: QuotesType;
   openModal: () => void;
+  refetch: () => void;
+  closeModal: () => void;
 };
 
 type Inputs = {
@@ -15,13 +17,16 @@ type Inputs = {
   content: string;
 };
 
-const EditQuote: React.FC<Props> = ({ quote }) => {
+const EditQuote: React.FC<Props> = ({ quote, refetch, closeModal }) => {
   const { mutate } = useMutation({
     mutationFn: async (newQuote: Inputs) => {
-      return await axiosCONFIG.put(`/quote/${quote.id}`, newQuote);
+      return await axiosCONFIG.put(`/quote/${quote.id}`, newQuote).then(() => {
+        refetch();
+        closeModal();
+      });
     },
   });
-  const { register, handleSubmit, reset, formState } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
 
   return (
     <form
@@ -39,6 +44,7 @@ const EditQuote: React.FC<Props> = ({ quote }) => {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required
           placeholder="Author"
+          defaultValue={quote.author}
           {...register("author")}
         />
       </div>
