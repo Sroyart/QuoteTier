@@ -2,9 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import axiosCONFIG from "../../conf.axios";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import CommentForm from "../../components/CommentForm";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Loader from "../../components/Loader";
 import { CommentType } from "../../type/CommentType";
+import { MdDelete } from "react-icons/md";
 
 export const Route = createFileRoute("/quote/$id")({
   component: Quotes,
@@ -15,6 +16,14 @@ function Quotes() {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["quote"],
     queryFn: async () => await axiosCONFIG.get(`/quote/${postId.id}`),
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: async (deleteComment: { id: string }) => {
+      return await axiosCONFIG
+        .delete(`/comment/${deleteComment.id}`)
+        .then(() => refetch());
+    },
   });
 
   if (isLoading) <Loader />;
@@ -47,6 +56,14 @@ function Quotes() {
             {comment.author}
           </h6>
           <p className="text-gray-900 dark:text-white">{comment.content}</p>
+          <div className="text-right">
+            <button
+              onClick={() => mutate({ id: comment.id })}
+              className="w-full mr-2 gap-2 sm:w-auto bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+            >
+              <MdDelete color="white" />
+            </button>
+          </div>
         </div>
       ))}
     </div>

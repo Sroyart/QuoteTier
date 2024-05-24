@@ -38,8 +38,8 @@ const CommentForm: React.FC<{ quotes_id: string; refetch: () => void }> = ({
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
 
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="">
-        <div className="relative z-0 max-w-md mb-5 group">
+      <div className="flex space-x-4">
+        <div className="flex-1 items-center relative z-0 max-w-sm mb-5 group">
           <input
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
@@ -50,7 +50,7 @@ const CommentForm: React.FC<{ quotes_id: string; refetch: () => void }> = ({
             Pseudo
           </label>
         </div>
-        <div className="relative z-0 mb-5 group">
+        <div className="flex-1 relative z-0 mb-5 group">
           <input
             {...register("content", { required: true })}
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
