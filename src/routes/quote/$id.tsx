@@ -21,6 +21,9 @@ function Quotes() {
 
   return (
     <div className="mx-auto max-w-screen-xl block mt-6 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+      {data?.data.quote.certified && (
+        <p className="text-gray-300 text-end">(Certified)</p>
+      )}
       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {data?.data.quote.content}
       </h5>

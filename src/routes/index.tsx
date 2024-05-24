@@ -66,6 +66,7 @@ function Index() {
       </div>
       {data?.data.map((quote: QuotesType) => (
         <Quote
+          key={quote.id}
           quote={quote}
           mutate={mutate}
           handleSendLike={handleSendLike}
