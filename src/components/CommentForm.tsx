@@ -7,7 +7,7 @@ import axiosCONFIG from "../conf.axios";
 type Inputs = {
   author: string;
   content: string;
-  quotes_id: string; // Add the 'quoteId' property to the 'Inputs' type definition
+  quotes_id: string;
 };
 
 const CommentForm: React.FC<{ quotes_id: string; refetch: () => void }> = ({
@@ -35,8 +35,6 @@ const CommentForm: React.FC<{ quotes_id: string; refetch: () => void }> = ({
   }, [formState, refetch, reset]);
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex space-x-4">
         <div className="flex-1 items-center relative z-0 max-w-sm mb-5 group">
